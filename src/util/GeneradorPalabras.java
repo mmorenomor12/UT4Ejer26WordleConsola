@@ -3,7 +3,8 @@ package util;
 public class GeneradorPalabras {
                                         //  00000000001111111111222222222233333333334444
                                         //  01234567890123456789012345678901234567890123
-    private static final String PALABRAS = "pila mesa vaso dado lupa hoja arpa mono seta";
+    //private static final String PALABRAS = "pila mesa vaso dado lupa hoja arpa mono seta";
+    private static final String PALABRAS = "luz oceano fragmento digital amanecer codigo teatro universo fugaz resonancia espejo silencio viento algoritmo latido horizonte metalico vibrar instante sombra circuito raiz llama destello profundo artificio memoria textura neon eco cristal sueno prisma palabra impulso celeste binario niebla chispa aurora verso enlace vacio atomo reflejo canto orbita secuencia vibracion chispeante existencia";
 
     public static String obtenerPalabra() {
 
