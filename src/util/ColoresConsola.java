@@ -20,7 +20,7 @@ public class ColoresConsola {
     }
 
     public static void imprimirEnAmarillo(char texto){
-        System.out.println(AMARILLO + texto + RESET);
+        System.out.print(AMARILLO + texto + RESET);
     }
 
     public static void imprimirEnAzul(String texto){

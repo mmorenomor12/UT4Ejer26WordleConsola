@@ -7,7 +7,6 @@ public class GeneradorPalabras {
 
     public static String obtenerPalabra() {
 
-
         int cantidadEspacios = 0;
 
         //Bucle para contar la cantidad de espacios para luego sumar 1 y sabemos cuantas palabras hay
@@ -50,4 +49,7 @@ public class GeneradorPalabras {
     public static void main(String[] args) {
         System.out.println(obtenerPalabra());
     }
+
+
+
 }
