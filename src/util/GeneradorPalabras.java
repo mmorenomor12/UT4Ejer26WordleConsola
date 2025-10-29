@@ -6,7 +6,7 @@ public class GeneradorPalabras {
     private static final String PALABRAS = "pila mesa vaso dado lupa hoja arpa mono seta";
 
     public static String obtenerPalabra() {
-        //TODO completar
+
 
         int cantidadEspacios = 0;
 

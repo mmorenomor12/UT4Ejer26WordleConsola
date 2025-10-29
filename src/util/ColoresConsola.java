@@ -11,15 +11,15 @@ public class ColoresConsola {
     public static final String CIAN = "\u001B[36m";
     public static final String BLANCO = "\u001B[37m";
 
-    public static void imprimirEnRojo(String texto){
-        System.out.println(ROJO + texto + RESET);
+    public static void imprimirEnRojo(char texto){
+        System.out.print(ROJO + texto + RESET);
     }
 
-    public static void imprimirEnVerde(String texto){
-        System.out.println(VERDE + texto + RESET);
+    public static void imprimirEnVerde(char texto){
+        System.out.print(VERDE + texto + RESET);
     }
 
-    public static void imprimirEnAmarillo(String texto){
+    public static void imprimirEnAmarillo(char texto){
         System.out.println(AMARILLO + texto + RESET);
     }
 
