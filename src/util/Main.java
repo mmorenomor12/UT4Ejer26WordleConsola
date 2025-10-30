@@ -64,11 +64,10 @@ public class Main {
             System.out.println("-   Donde x es el total de letras  -");
             System.out.println("-         Tienes 6 intentos        -");
             System.out.println("------------------------------------");
-            System.out.println("Intento " + (contadorWhile + 1));
             wordle.obtenerContadorPalabras();
 
             while (contadorWhile < 7) {
-
+                System.out.println("Intento " + (contadorWhile + 1));
                 palabraUsuario = scanner.nextLine();
                 if (wordle.evaluarPalabra(palabraUsuario)) {
                     System.out.println("------------------------------------");
@@ -76,9 +75,8 @@ public class Main {
                     System.out.println("------------------------------------");
                     break;
                 }
-                if (contadorWhile < 6) {
-                    System.out.println("Intento " + (contadorWhile + 1));
-                }else{
+                if (contadorWhile == 6) {
+
                     System.out.println("------------------------------------");
                     System.out.println("-          Lo intentaste           -");
                     System.out.println(" La palabra era: " + wordle.palabra);
@@ -299,9 +297,9 @@ public class Main {
 
     private static boolean volverAJugarModo() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("------------------------------------");
-        System.out.println("- ¿Desea volver a jugar este modo? -");
-        System.out.println("------------------------------------");
+        System.out.println("---------------------------------------");
+        System.out.println("-¿Desea volver a jugar este modo?(S/N)-");
+        System.out.println("---------------------------------------");
 
         return ProcesarRespuestaVolverAJugar(scanner.next());
     }
