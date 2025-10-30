@@ -111,6 +111,7 @@ public class Main {
     }
 
     private static boolean esEnteroPositivo(String s) {
+        //Para el switch de jugarDuo() que solo sea números positivos
         if (s == null) return false;
         s = s.trim();
         if (s.isEmpty()) return false;
@@ -163,18 +164,21 @@ public class Main {
                     if (opcionDeJuego == 1) {
                         jugarConPalabra(nombreJug1, nombreJug2);
                         puedeSeguir = true;
-                    } else if (opcionDeJuego == 2) {
+                    }
+                    else if (opcionDeJuego == 2) {
                         jugarPorTurnos(nombreJug1, nombreJug2);
                         puedeSeguir = true;
-                    } else {
-                        System.out.println("------------------------------------");
-                        System.out.println("-   Debes escoger 1 o 2 válidos    -");
-                        System.out.println("------------------------------------");
                     }
-                } else {
-                    System.out.println("------------------------------------");
-                    System.out.println("-   Introducid un número: 1 o 2    -");
-                    System.out.println("------------------------------------");
+                    else {
+                        System.out.println("-----------------------------------------");
+                        System.out.println("- Debes escoger una opcion válida (1/2) -");
+                        System.out.println("-----------------------------------------");
+                    }
+                }
+                else {
+                    System.out.println("-----------------------------------------");
+                    System.out.println("- Debes escoger una opcion válida (1/2) -");
+                    System.out.println("-----------------------------------------");
                 }
             }
 
@@ -197,7 +201,7 @@ public class Main {
         System.out.println("-   Tiene 6 intentos cada jugador  -");
         System.out.println("------------------------------------");
 
-        // Mostrar las 'x' solo una vez
+        // Muestra las x una vez
         wordle.obtenerContadorPalabras();
         System.out.println();
 
@@ -242,7 +246,7 @@ public class Main {
             }
         }
 
-        // Si llegamos aquí, nadie acertó en sus 6 intentos
+        //Más de 6 intentos de ambos
         System.out.println("------------------------------------");
         System.out.println("-         Lo intentasteis          -");
         System.out.println(" La palabra era: " + wordle.palabra);
@@ -346,6 +350,7 @@ public class Main {
     }
 
     private static boolean volverAJugarModo() {
+        //Puede acabar el modo
         Scanner scanner = new Scanner(System.in);
         System.out.println("---------------------------------------");
         System.out.println("-¿Desea volver a jugar este modo?(S/N)-");
@@ -355,6 +360,7 @@ public class Main {
     }
 
     private static boolean volverAJugar() {
+        //Acaba el juego
             Scanner scanner = new Scanner(System.in);
             System.out.println("------------------------------------");
             System.out.println("-   ¿Quiere seguir jugando?(S/N)   -");
@@ -364,6 +370,7 @@ public class Main {
     }
 
     private static boolean ProcesarRespuestaVolverAJugar(String respuesta){
+        //Analiza la entrada para volverAJugarModo y volverAJugar
         Scanner scanner = new Scanner(System.in);
         while(true){
             if(respuesta.equalsIgnoreCase("S")){
