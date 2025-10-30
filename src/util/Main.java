@@ -22,7 +22,7 @@ public class Main {
                 String entrada = scanner.nextLine().trim();
                 boolean esNumero = true;
 
-                // comprobar si todos los caracteres son dígitos
+                //Comprobar si todos los caracteres son dígitos
                 for (int i = 0; i < entrada.length(); i++) {
                     if (!Character.isDigit(entrada.charAt(i))) {
                         esNumero = false;
@@ -82,29 +82,42 @@ public class Main {
             System.out.println("------------------------------------");
             wordle.obtenerContadorPalabras();
 
-            while (contadorWhile < 7) {
+            while (contadorWhile < 5) {
                 System.out.println("Intento " + (contadorWhile + 1));
                 palabraUsuario = scanner.nextLine();
                 if (wordle.evaluarPalabra(palabraUsuario)) {
                     System.out.println("------------------------------------");
                     System.out.println("-         ¡LO ADIVINASTE!          -");
                     System.out.println("------------------------------------");
+                    contadorWhile = 0;
                     break;
                 }
-                if (contadorWhile == 6) {
 
-                    System.out.println("------------------------------------");
-                    System.out.println("-          Lo intentaste           -");
-                    System.out.println(" La palabra era: " + wordle.palabra);
-                    System.out.println("------------------------------------");
-                    break;
-                }
                 contadorWhile++;
+            }
+            if (contadorWhile == 5) {
+
+                System.out.println("------------------------------------");
+                System.out.println("-          Lo intentaste           -");
+                System.out.println(" La palabra era: " + wordle.palabra);
+                System.out.println("------------------------------------");
+                contadorWhile = 0;
+                break;
             }
 
             jugar = volverAJugarModo();
 
         }
+    }
+
+    private static boolean esEnteroPositivo(String s) {
+        if (s == null) return false;
+        s = s.trim();
+        if (s.isEmpty()) return false;
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i))) return false;
+        }
+        return true;
     }
 
     private static void jugarDuo() {
@@ -118,12 +131,14 @@ public class Main {
         System.out.println("-         primer jugador?          -");
         System.out.println("------------------------------------");
         nombreJug1 = scanner.nextLine();
+
         System.out.println("------------------------------------");
         System.out.println("-      ¿Cuál es el nombre del      -");
         System.out.println("-         segundo jugador?         -");
         System.out.println("------------------------------------");
         nombreJug2 = scanner.nextLine();
-        while(seguirJugando){
+
+        while (seguirJugando) {
 
             System.out.println("------------------------------------");
             System.out.println("        Bienvenido " + nombreJug1);
@@ -133,56 +148,71 @@ public class Main {
             int opcionDeJuego = 0;
             boolean puedeSeguir = false;
 
-            while(!puedeSeguir){
+            while (!puedeSeguir) {
                 System.out.println("-----------------------------------------------");
                 System.out.println("-         Escoged un modo de juego            -");
                 System.out.println("- 1. Uno escoge una palabra y el otro adivina -");
                 System.out.println("- 2. Adivinar la palabra por turnos           -");
                 System.out.println("-----------------------------------------------");
-                opcionDeJuego = Integer.parseInt(scanner.nextLine());
-                switch (opcionDeJuego){
-                    case 1:
+
+                String entrada = scanner.nextLine().trim();
+                boolean esNumero = esEnteroPositivo(entrada);
+
+                if (esNumero) {
+                    opcionDeJuego = Integer.parseInt(entrada);
+                    if (opcionDeJuego == 1) {
                         jugarConPalabra(nombreJug1, nombreJug2);
                         puedeSeguir = true;
-                        break;
-                    case 2:
+                    } else if (opcionDeJuego == 2) {
                         jugarPorTurnos(nombreJug1, nombreJug2);
                         puedeSeguir = true;
-                        break;
-                    default:
+                    } else {
                         System.out.println("------------------------------------");
-                        System.out.println("-   Debes escoger un modo válido   -");
+                        System.out.println("-   Debes escoger 1 o 2 válidos    -");
                         System.out.println("------------------------------------");
+                    }
+                } else {
+                    System.out.println("------------------------------------");
+                    System.out.println("-   Introducid un número: 1 o 2    -");
+                    System.out.println("------------------------------------");
                 }
             }
+
             seguirJugando = volverAJugarModo();
         }
     }
-
 
     private static void jugarPorTurnos(String nombreJugador1, String nombreJugador2) {
 
         Scanner scanner = new Scanner(System.in);
         String palabraUsuario = "";
-        int contadorWhile = 0;
         int rondaJugador1 = 0;
         int rondaJugador2 = 0;
 
         Wordle wordle = new Wordle();
+
         System.out.println("------------------------------------");
         System.out.println("-    Intentad adivinar la palabra  -");
         System.out.println("-   Donde x es el total de letras  -");
         System.out.println("-   Tiene 6 intentos cada jugador  -");
         System.out.println("------------------------------------");
+
+        // Mostrar las 'x' solo una vez
         wordle.obtenerContadorPalabras();
         System.out.println();
 
-        while (contadorWhile < 12) {
+        for (int turnoTotal = 0; turnoTotal < 12; turnoTotal++) {
+            boolean turnoDeJ1 = (turnoTotal % 2 == 0);
 
-            if (contadorWhile % 2 == 0) {
+            if (turnoDeJ1) {
+                // Si J1 ya consumió sus 6 intentos, saltamos su turno
+                if (rondaJugador1 >= 6) continue;
+
                 System.out.println("Intento " + (rondaJugador1 + 1));
                 System.out.println("Turno de " + nombreJugador1);
+
                 palabraUsuario = scanner.nextLine();
+
                 if (wordle.evaluarPalabra(palabraUsuario)) {
                     System.out.println("------------------------------------");
                     System.out.println("-         ¡LO ADIVINASTE!          -");
@@ -192,11 +222,15 @@ public class Main {
                 }
                 rondaJugador1++;
 
-            }
-            else {
+            } else {
+                // Turno J2
+                if (rondaJugador2 >= 6) continue;
+
                 System.out.println("Intento " + (rondaJugador2 + 1));
                 System.out.println("Turno de " + nombreJugador2);
+
                 palabraUsuario = scanner.nextLine();
+
                 if (wordle.evaluarPalabra(palabraUsuario)) {
                     System.out.println("------------------------------------");
                     System.out.println("-         ¡LO ADIVINASTE!          -");
@@ -206,15 +240,15 @@ public class Main {
                 }
                 rondaJugador2++;
             }
-            contadorWhile++;
         }
-        if (contadorWhile > 12) {
-            System.out.println("------------------------------------");
-            System.out.println("-         Lo intentasteis          -");
-            System.out.println(" La palabra era: " + wordle.palabra);
-            System.out.println("------------------------------------");
-        }
+
+        // Si llegamos aquí, nadie acertó en sus 6 intentos
+        System.out.println("------------------------------------");
+        System.out.println("-         Lo intentasteis          -");
+        System.out.println(" La palabra era: " + wordle.palabra);
+        System.out.println("------------------------------------");
     }
+
 
     private static void jugarConPalabra(String nombreJugador1, String nombreJugador2) {
         Scanner scanner = new Scanner(System.in);
@@ -330,11 +364,17 @@ public class Main {
     }
 
     private static boolean ProcesarRespuestaVolverAJugar(String respuesta){
+        Scanner scanner = new Scanner(System.in);
         while(true){
             if(respuesta.equalsIgnoreCase("S")){
                 return true;
             }else if(respuesta.equalsIgnoreCase("N")){
                 return false;
+            }else {
+                System.out.println("------------------------------------");
+                System.out.println("-  Escoja una opción válida (S/N)  -");
+                System.out.println("------------------------------------");
+               respuesta = scanner.nextLine();
             }
         }
     }
