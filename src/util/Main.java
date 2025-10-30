@@ -11,30 +11,46 @@ public class Main {
         int numJugadores = 0;
         boolean volverAPreguntar = true;
         boolean terminarJuego = false;
+
         while (!terminarJuego) {
             while (volverAPreguntar) {
                 System.out.println("------------------------------------");
-                System.out.println("-      ¡Jueguemos al wordle!       -");
+                System.out.println("-      ¡Juguemos al Wordle!        -");
                 System.out.println("-  ¿Cuántos jugadores sois? (1/2)  -");
                 System.out.println("------------------------------------");
-                numJugadores = Integer.parseInt(scanner.nextLine());
 
-                switch (numJugadores) {
-                    case 1:
+                String entrada = scanner.nextLine().trim();
+                boolean esNumero = true;
+
+                // comprobar si todos los caracteres son dígitos
+                for (int i = 0; i < entrada.length(); i++) {
+                    if (!Character.isDigit(entrada.charAt(i))) {
+                        esNumero = false;
+                        break;
+                    }
+                }
+
+                if (esNumero && !entrada.isEmpty()) {
+                    numJugadores = Integer.parseInt(entrada);
+
+                    if (numJugadores == 1) {
                         volverAPreguntar = false;
                         jugarSolo();
-                        break;
-                    case 2:
+                    } else if (numJugadores == 2) {
                         volverAPreguntar = false;
                         jugarDuo();
-                        break;
-                    default:
+                    } else {
                         System.out.println("------------------------------------");
                         System.out.println("-   Debes jugar solo o en pareja   -");
                         System.out.println("------------------------------------");
+                    }
+                } else {
+                    System.out.println("------------------------------------");
+                    System.out.println("-  Por favor, introduce 1 o 2 :)   -");
+                    System.out.println("------------------------------------");
                 }
-
             }
+
             terminarJuego = !volverAJugar();
             volverAPreguntar = !terminarJuego;
         }
